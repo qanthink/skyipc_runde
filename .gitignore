@@ -27,7 +27,7 @@
 *.app
 
 # cmake
-build*
+#build*
 temp
 tmp
 

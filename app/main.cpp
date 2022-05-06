@@ -1,13 +1,11 @@
 /*---------------------------------------------------------------- 
-sigma star版权所有。
+qanthink 版权所有。
 作者：
-时间：2020.7.10
+时间：2022.4.22
 ----------------------------------------------------------------*/
 
 #include <iostream>
 #include <unistd.h>
-#include <signal.h>
-#include <thread>
 
 #include "ao.hpp"
 #include "audio_player.h"
@@ -16,16 +14,29 @@ using namespace std;
 
 int main(int argc, const char *argv[])
 {
-	AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();
+	AudioOut *pAudioOut = AudioOut::getInstance();			// init Mi_AUDIO_OUT
+	pAudioOut->setVolume(-30);
+	AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();	// init audio player.
+
+	// test PCM
 	//pAudioPlayer->playPCM("/mnt/linux/Music/pcm_16000_16bit.pcm");
 	//sleep(5);
-	//pAudioPlayer->playWAV("/mnt/linux/Music/1234567890abcde.wav");
-	//sleep(5);
-	pAudioPlayer->playWAV("/mnt/linux/Downloads/tiramisuV010/sourcecode/sdk/verify/mi_demo/source/audio/wav/16K_16bit_MONO_30s.wav");
-	sleep(5);
 
-	//readWavHead("/mnt/linux/Music/1234567890abcde.wav");
-	//readWavHead("/mnt/linux/Downloads/tiramisuV010/sourcecode/sdk/verify/mi_demo/source/audio/wav/8K_16bit_MONO_30s.wav");
+	// test WAV
+	pAudioPlayer->playWAV("/mnt/linux/Audios/my_wav/1234567890abcde.wav");
+	sleep(5);		// remove sleep() in your codes. There is just a sample.
+	pAudioPlayer->playWAV("/mnt/linux/Audios/my_wav/1234567890abcde.wav");
+	sleep(5);
+	pAudioPlayer->playWAV("/mnt/linux/Audios/music/16K_16bit_MONO_30s.wav");
+	sleep(35);
+
+	// You can just play 3 wavs and 3 pcms. If you want to play more, please connect qanthink@163.com.
+	pAudioPlayer->playWAV("/mnt/linux/Audio/my_wav/1234567890abcde.wav");
+	sleep(10);
+	pAudioPlayer->playWAV("/mnt/linux/Audio/my_wav/1234567890abcde.wav");
+	sleep(10);
+	pAudioPlayer->playWAV("/mnt/linux/Audio/my_wav/1234567890abcde.wav");
+	sleep(10);
 
 	while(true)
 	{
@@ -41,10 +52,6 @@ int main(int argc, const char *argv[])
 			break;
 		}
 	}
-
-	//thAi.join();
-	//thVideo.join();
-	//pLive555Rtsp->disable();
 	
 	return 0;
 }

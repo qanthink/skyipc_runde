@@ -1,0 +1,16 @@
+如何编译：
+
+1.
+vi env/env.cmake
+在env/env.cmake中修改编译器的路径。
+
+2.
+cd build
+cmake ..
+make -j8
+会生成可执行文件：build/app/skyipc
+
+3.
+拷贝so文件和bin文件到开发板下：
+cp app/qanthink/*.sp   /customer/lib
+cp build/app/skyipc  /customer
