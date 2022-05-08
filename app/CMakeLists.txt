@@ -3,14 +3,14 @@
 
 include_directories(
 	../soc_sdk/include
-
 	qanthink
+	qanthink/libffmpeg/include
 )
 
 link_directories(
 	../soc_sdk/dynamic
-
 	qanthink
+	qanthink/libffmpeg/lib
 )
 
 #增加需要编译的源文件
@@ -21,10 +21,15 @@ add_executable(skyipc ${DIR_SRC}) # 生成可执行文件
 
 #设置 target 需要链接的库
 target_link_libraries(skyipc 
-	mi_ao mi_sys
+	mi_ao
+	mi_sys
 	cam_os_wrapper
 
-	ao audio_player
+	ao
+	audio_player
+	pthread
+	ffmpeg
+	avformat avcodec swscale swresample avutil
 )
 
 #strip 剪裁
