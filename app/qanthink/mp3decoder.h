@@ -27,9 +27,17 @@ public:
 	int disable();
 
 	int recvPcmFrame(unsigned char*const dataBuff, const unsigned int dataSize);
-	int test();
+	
+	int getMp3Frame4Bytes(const char *filePath, unsigned char *p4BytesData);
+	int analyzeMp3Frame(const char *filePath, long long int *pRate, long long int *pChLayout, AVSampleFormat *pAvSampleFmt);
+
+	int mp3ToPcm(const char *mp3Path, const char *pcmPath);
+	int mp3Decoding(const char *mp3Path);
+	
 	int pcmFileResample(const char *dstPcmPath, long long int dstRate, long long int dstChLayout, AVSampleFormat dstAvSampleFmt, \
 			const char *srcPcmPath, long long int srcRate, long long int srcChLayout, AVSampleFormat srcAvSampleFmt);
+	int pcmDataResample(char *dstPcmData, unsigned int dstPcmLen, long long int dstRate, long long int dstChLayout, AVSampleFormat dstAvSampleFmt, \
+			const char *srcPcmData, unsigned int srcPcmLen, long long int srcRate, long long int srcChLayout, AVSampleFormat srcAvSampleFmt);
 	
 private:
 	Mp3Decoder();
@@ -39,5 +47,6 @@ private:
 
 	bool bEnable = false;
 	bool bRunning = false;		// stream 线程的运行状态。
+
 };
 

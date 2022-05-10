@@ -46,7 +46,7 @@ int main(int argc, const char *argv[])
 	pAudioOut->setVolume(volume);
 	AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();	// init audio player.
 
-	#if 1
+	#if 0
 	// test PCM
 	//pAudioPlayer->playPCM("/mnt/linux/Audios/pcm/pcm_16000_16bit.pcm");
 	pAudioPlayer->playPCM("/mnt/linux/Audios/pcm/xiaopingguo_mono_16b_16000.pcm");
@@ -75,11 +75,25 @@ int main(int argc, const char *argv[])
 	//sleep(5);		// remove sleep() in your codes. There is just a sample.
 	#endif
 
+	#if 1
+	pAudioPlayer->playMP3("/mnt/linux/Audios/mp3/xiaopingguo.mp3");
+	sleep(5);
+	#endif
+
 	#if 0
 	Mp3Decoder *pMp3Decoder = Mp3Decoder::getInstance();
-	//pMp3Decoder->test();
-	pMp3Decoder->pcmFileResample("/mnt/linux/Audios/pcm/xiaopingguo_mono_16b_16000.pcm", 16000, AV_CH_LAYOUT_MONO, AV_SAMPLE_FMT_S16, \
-				"/mnt/linux/Audios/pcm/xiaopingguo_stero_32b_44100.pcm", 44100, AV_CH_LAYOUT_STEREO, AV_SAMPLE_FMT_FLT);
+	//pMp3Decoder->mp3ToPcm("/mnt/linux/Audios/mp3/xiaopingguo.mp3", "/mnt/linux/Audios/pcm/test0510.pcm");
+	pMp3Decoder->mp3Decoding("/mnt/linux/Audios/mp3/xiaopingguo.mp3");
+	
+	//pMp3Decoder->pcmFileResample("/mnt/linux/Audios/pcm/xiaopingguo_mono_16b_16000.pcm", 16000, AV_CH_LAYOUT_MONO, AV_SAMPLE_FMT_S16, \
+	//			"/mnt/linux/Audios/pcm/xiaopingguo_stero_32b_44100.pcm", 44100, AV_CH_LAYOUT_STEREO, AV_SAMPLE_FMT_FLT);
+	#endif
+
+	#if 0
+	unsigned char p4BytesData[4];
+	Mp3Decoder *pMp3Decoder = Mp3Decoder::getInstance();
+	pMp3Decoder->getMp3Frame4Bytes("/mnt/linux/Audios/mp3/xiaopingguo.mp3", p4BytesData);
+	pMp3Decoder->analyzeMp3Frame("/mnt/linux/Audios/mp3/xiaopingguo.mp3", NULL, NULL, NULL);
 	#endif
 
 	while(true)
