@@ -59,6 +59,7 @@ int main(int argc, const char *argv[])
 		sleep(1);
 		static int sleepCntSec = 0;
 		if(4 == (++sleepCntSec))
+		//if(20 == (++sleepCntSec))
 		{
 			cout << "Play over. Support by qanthink@163.com" << endl;
 			return 0;
