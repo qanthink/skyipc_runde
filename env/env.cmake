@@ -33,3 +33,12 @@ endif()
 SET(CMAKE_C_COMPILER  	${ToolPath}/${ToolPrefix}gcc)
 SET(CMAKE_CXX_COMPILER 	${ToolPath}/${ToolPrefix}g++)
 SET(CMAKE_STRIP 		${ToolPath}/${ToolPrefix}strip)
+
+add_custom_target(strip)
+
+add_custom_command(TARGET strip
+	POST_BUILD
+	COMMAND ls -l -h app/skyipc
+	COMMAND ${CMAKE_STRIP} -s app/skyipc
+	COMMAND ls -l -h app/skyipc
+)
