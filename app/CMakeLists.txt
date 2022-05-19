@@ -25,11 +25,11 @@ target_link_libraries(skyipc
 	mi_sys
 	cam_os_wrapper
 
-	ao
-	audio_player
 	pthread
+	audio_player
 	ffmpeg
-	avformat avcodec swscale swresample avutil
+	ao
+	avformat avcodec swresample avutil
 )
 
 #strip 剪裁

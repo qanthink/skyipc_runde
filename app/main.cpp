@@ -6,21 +6,30 @@ qanthink 版权所有。
 
 #include <iostream>
 #include <unistd.h>
-
 #include "ao.hpp"
 #include "audio_player.h"
-#include "mp3decoder.h"
-
-extern "C" {
-#include <libavutil/opt.h>
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
-#include <libswresample/swresample.h>
-}
-
 
 using namespace std;
 
+#if 0
+int main()
+{
+	const char *mp3FilePath = "XiYangYang.mp3";
+	const char *wavFilePath = "HuiTaiLang.wav";
+	const char *pcmFilePath = "RuanMianMian.pcm";
+	
+	AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();
+	pAudioPlayer->playMP3(mp3FilePath);
+	pAudioPlayer->playWAV(wavFilePath);
+	pAudioPlayer->playPCM(pcmFilePath);
+
+	system("pause");
+
+	return 0;
+}
+#endif
+
+#if 1
 int main(int argc, const char *argv[])
 {
 	int volume = -30;
@@ -43,22 +52,19 @@ int main(int argc, const char *argv[])
 
 	AudioOut *pAudioOut = AudioOut::getInstance();			// init Mi_AUDIO_OUT
 	pAudioOut->setVolume(volume);
-	AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();	// init audio player.
 
-	#if 1
-	//pAudioPlayer->playMP3("/mnt/linux/Audios/mp3/xiaopingguo.mp3");
-	//pAudioPlayer->playMP3("/mnt/linux/Audios/mp3/bencaogangmu_f.mp3");
-	//pAudioPlayer->playMP3("/mnt/linux/Audios/mp3/bencaogangmu_h.mp3");
-	//pAudioPlayer->playMP3("/mnt/linux/Audios/mp3/1234567890abcde.mp3");
-	pAudioPlayer->playMP3(filePath);
-	#endif
+	bool bBlock = true;
+	//AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();	// init audio player.
+	//pAudioPlayer->playMP3(filePath, true);
+	AudioPlayer audioPlayer;
+	audioPlayer.playMP3(filePath, true);
 
 	#if 1
 	while(true)
 	{
-		sleep(1);
+		sleep(2);
 		static int sleepCntSec = 0;
-		if(4 == (++sleepCntSec))
+		if(1 == (++sleepCntSec))
 		//if(20 == (++sleepCntSec))
 		{
 			cout << "Play over. Support by qanthink@163.com" << endl;
@@ -69,4 +75,4 @@ int main(int argc, const char *argv[])
 	
 	return 0;
 }
-
+#endif
