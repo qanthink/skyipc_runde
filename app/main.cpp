@@ -54,8 +54,6 @@ int main(int argc, const char *argv[])
 	pAudioOut->setVolume(volume);
 
 	bool bBlock = true;
-	//AudioPlayer *pAudioPlayer = AudioPlayer::getInstance();	// init audio player.
-	//pAudioPlayer->playMP3(filePath, true);
 	AudioPlayer audioPlayer;
 	audioPlayer.playMP3(filePath, true);
 
